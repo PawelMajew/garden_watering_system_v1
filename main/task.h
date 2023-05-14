@@ -16,7 +16,7 @@
 #include "freertos/timers.h"
 #include "freertos/event_groups.h"
 
-#define BOARD 1
+#define BOARD 0
 
 /**********************************************************************
 Function Declarations

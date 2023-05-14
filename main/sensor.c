@@ -55,7 +55,7 @@ static void averageResult(sensorData* pData)
 {
     int32_t tempData = 0;
     uint8_t sample = 0;
-    uint8_t nrOfAvgValues = 10;
+    uint8_t nrOfAvgValues = 20;
 
     for(sample = 0; sample < nrOfAvgValues; sample++)
     {

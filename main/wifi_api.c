@@ -16,7 +16,7 @@
 Macros
 **********************************************************************/
 
-#define BOARD 1
+#define BOARD 0
 
 #if BOARD == 0
     #define SENSOR_NUMBER 0

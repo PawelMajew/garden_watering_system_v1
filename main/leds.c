@@ -37,17 +37,24 @@ void ledsGpioInit(void)
     esp_err_t err = ESP_OK;
 
     esp_rom_gpio_pad_select_gpio(lowHydrationStatus);
-    err = gpio_set_direction(lowHydrationStatus, GPIO_MODE_OUTPUT);
+    err += gpio_set_direction(lowHydrationStatus, GPIO_MODE_OUTPUT);
     esp_rom_gpio_pad_select_gpio(moderateHydrationStatus);
-    err = gpio_set_direction(moderateHydrationStatus, GPIO_MODE_OUTPUT);
+    err += gpio_set_direction(moderateHydrationStatus, GPIO_MODE_OUTPUT);
     esp_rom_gpio_pad_select_gpio(goodHydrationStatus);
-    err = gpio_set_direction(goodHydrationStatus, GPIO_MODE_OUTPUT);
+    err += gpio_set_direction(goodHydrationStatus, GPIO_MODE_OUTPUT);
     esp_rom_gpio_pad_select_gpio(servoStatus);
-    err = gpio_set_direction(servoStatus, GPIO_MODE_OUTPUT);
+    err += gpio_set_direction(servoStatus, GPIO_MODE_OUTPUT);
     esp_rom_gpio_pad_select_gpio(wifiUiStatus);
-    err = gpio_set_direction(wifiUiStatus, GPIO_MODE_OUTPUT);
+    err += gpio_set_direction(wifiUiStatus, GPIO_MODE_OUTPUT);
 
-    ESP_LOGI(TAG, "LEDS configuration successful");
+    if (err == 0)
+    {
+        ESP_LOGI(TAG, "LEDS configuration successful");
+    }
+    else
+    {
+        ESP_LOGE(TAG, "LEDS configuration fail");
+    }
 }
 
 /*********************************************************************/

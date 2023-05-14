@@ -15,7 +15,7 @@
 #include "servo.h"
 #include "task.h"
 
-#define BOARD 1
+#define BOARD 0
 
 void app_main(void)
 {

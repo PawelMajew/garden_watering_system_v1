@@ -25,17 +25,19 @@ Macros
 **********************************************************************/
 
 /* Time when we are not irrigating. */
-#define NORMAL_MEASURMENT_TIME 1000
+#define NORMAL_MEASURMENT_TIME 1000 //* 60 * 60 / 2
 /* Time when we are irrigating. */
-#define WATERING_MEASURMENT_TIME 5000
+#define WATERING_MEASURMENT_TIME 1000 //TIME_WATERING_1 + TIME_PAUSE_1 + TIME_WATERING_2 + TIME_PAUSE_2
+/* Time when we are irrigating manual. */
+#define MANUAL_WATERING_MEASURMENT_TIME 1000 //* 60 
 /* How often data will be downloaded from the site. */
 #define GET_DELAY 1000
 
 /* Watering sequence times. */
-#define TIME_WATERING_1 1000
-#define TIME_PAUSE_1 1000
-#define TIME_WATERING_2 1000
-#define TIME_PAUSE_2 1000
+#define TIME_WATERING_1 1000 //* 60 * 2
+#define TIME_PAUSE_1 1000 //* 60 * 10
+#define TIME_WATERING_2 1000 //* 60 * 1
+#define TIME_PAUSE_2 1000 //* 60 * 5
 
 #define TRUE 1
 #define FALSE 0
@@ -95,7 +97,11 @@ void taskSensor(void *pvParameters) {
         restPost(&data);
         taskLedStatus(&data);
 
-        if (wifi_api.wateringProcess == TRUE || wifi_api.sprinklerState == TRUE)
+        if ( wifi_api.sprinklerState == TRUE)
+        {
+            vTaskDelay(MANUAL_WATERING_MEASURMENT_TIME / portTICK_PERIOD_MS);
+        }
+        else if (wifi_api.wateringProcess == TRUE)
         {
             vTaskDelay(WATERING_MEASURMENT_TIME / portTICK_PERIOD_MS);
         }
